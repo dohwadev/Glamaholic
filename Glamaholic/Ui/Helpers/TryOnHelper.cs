@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -29,7 +28,7 @@ namespace Glamaholic.Ui.Helpers {
                 return;
             }
 
-            var right = this.Ui.Plugin.Interface.InstalledPlugins.Any(state => state.InternalName == "ItemSearchPlugin");
+            var right = this.Ui.Plugin.Interface.PluginInternalNames.Contains("ItemSearchPlugin");
             HelperUtil.DrawHelper(tryOnAddon, "glamaholic-helper-try-on", right, this.DrawDropdown);
         }
 
@@ -49,7 +48,7 @@ namespace Glamaholic.Ui.Helpers {
 
         private static unsafe Dictionary<PlateSlot, SavedGlamourItem> GetTryOnItems() {
             var agent = (IntPtr) Framework.Instance()->GetUiModule()->GetAgentModule()->GetAgentByInternalId(AgentId.Tryon);
-            var firstItem = agent + 0x314;
+            var firstItem = agent + 0x2E8;
 
             var items = new Dictionary<PlateSlot, SavedGlamourItem>();
 
